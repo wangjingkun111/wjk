@@ -1,0 +1,61 @@
+scp 文件名 登录用户名@目标机器IP或主机名:目标目录
+scp /home/hadoop/f1 hadoop@s1.hadoop:/home/hadoop/
+
+cp /etc/login.defs /etc/login.defs_back      先备份一个
+
+2）拷贝脚本
+cp scp_all.sh scp_all_zookeeper.sh
+
+
+#将/tmp/zookeeper-3.4.8.tar.gz 解压到 /usr/local/ 目录
+./ssh_root_zookeeper.sh tar -xzf /tmp/zookeeper-3.4.8.tar.gz -C /usr/local/
+
+#查看是否解压成功
+./ssh_root_zookeeper.sh "ls -l /usr/local/ | grep zoo"
+
+
+#修改每台机器的/usr/local/zookeeper-3.4.8，所属用户为hadoop
+./ssh_root_zookeeper.sh chown -R hadoop:hadoop /usr/local/zookeeper-3.4.8
+
+
+
+
+3.2.4 slaves
+slaves文件里面记录的是集群里所有DataNode的主机名
+
+hadoop-daemons.sh 中用到了 slaves 文件
+注意：配置文件里的host改成你自己的
+
+
+
+
+
+
+# 如果是不同hdfs集群间copy用标准写法
+hadoop fs -cp hdfs://ns1/haha.sh hdfs://ns1/test
+ hadoop fs -cp hdfs:/exe.sh hdfs:/test
+# 如果是同集群，用简写
+ hadoop fs -cp /haha.sh /data
+
+
+
+
+
+
+
+
+ hadoop fs -appendToFile ~/data.txt /user/panniu/hdfs/f32.10 追加写入文件 appendToFile
+
+
+#显示HDFS根目录中各文件和文件夹大小
+hadoop fs - du / 
+#以最大单位显示HDFS根目录中各文件和文件夹大小
+hadoop fs -du -h / 
+#仅显示HDFS根目录大小。即各文件和文件夹大小之和
+hadoop fs -du -s /
+
+
+
+
+--只复制表结构，不复制表数据
+CREATE TABLE empty_key_value_store LIKE key_value_store;
